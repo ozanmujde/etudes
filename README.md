@@ -1,0 +1,1 @@
+I created this repository after seeing it from Peter Norvigs pytudes. Basically I will try to solve daily problems

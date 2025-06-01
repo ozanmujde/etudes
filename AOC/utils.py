@@ -155,7 +155,7 @@ def parse_sections(day: str, separator: str = "", parse_type: str = "str") -> li
     
     return sections
 
-def parse(day: str, parse_type: str = "str") -> list[Union[str, int, float]]:
+def parse(day: int, parse_type: str = "str") -> list[Union[str, int, float]]:
     """Parse input file and return raw lines."""
     input_file = f"input/day{day}.txt"
     with open(input_file, 'r') as file:
@@ -174,7 +174,7 @@ def parse(day: str, parse_type: str = "str") -> list[Union[str, int, float]]:
                     # Skip if strict conversion fails
             return result
 
-def parse_csv_line(day: str, delimiter: str = ",", parse_type: str = "str") -> list[list[Union[str, int, float]]]:
+def parse_csv_line(day: int, delimiter: str = ",", parse_type: str = "str") -> list[list[Union[str, int, float]]]:
     """Parse input file where each line contains delimiter-separated values."""
     lines = parse(day, "str")  # Always get raw strings first
     result = []
@@ -199,7 +199,7 @@ def parse_csv_line(day: str, delimiter: str = ",", parse_type: str = "str") -> l
     
     return result
 
-def parse_csv_numbers(day: str, delimiter: str = ",", parse_type: str = "auto") -> list[list[Union[int, float]]]:
+def parse_csv_numbers(day: int, delimiter: str = ",", parse_type: str = "auto") -> list[list[Union[int, float]]]:
     """Parse input file where each line contains delimiter-separated numbers."""
     lines = parse(day, "str")
     result = []
@@ -220,11 +220,11 @@ def parse_csv_numbers(day: str, delimiter: str = ",", parse_type: str = "auto") 
     
     return result
 
-def parse_csv_mixed(day: str, delimiter: str = ",", parse_type: str = "mixed") -> list[list[Union[int, float, str]]]:
+def parse_csv_mixed(day: int, delimiter: str = ",", parse_type: str = "mixed") -> list[list[Union[int, float, str]]]:
     """Parse input file with automatic type conversion."""
     return parse_csv_line(day, delimiter, parse_type)
 
-def parse_single_line_numbers(day: str, delimiter: str = None, parse_type: str = "int") -> list[Union[int, float]]:
+def parse_single_line_numbers(day: int, delimiter: str = None, parse_type: str = "int") -> list[Union[int, float]]:
     """Parse a single line of numbers separated by delimiter."""
     lines = parse(day, "str")
     if not lines:
@@ -245,6 +245,14 @@ def parse_single_line_numbers(day: str, delimiter: str = None, parse_type: str =
                 continue  # Skip values that can't be converted
     
     return result
+
+def parse_in_single_line(day: int, parse_type: str = "str") -> list[Union[str, int, float]]:
+    """Parse input file and return a single line of data."""
+    lines = parse(day, "str")
+    if not lines:
+        return ""
+    else:
+        return "".join(lines)
 
 def quantify_method(data: any, method: Callable) -> int:
     """
